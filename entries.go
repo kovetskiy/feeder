@@ -13,7 +13,7 @@ type (
 		Url        string `json:"url"`
 		Title      string `json:"title"`
 		Image      string `json:"image,omitempty"`
-		Preview    string `json:"preview"`
+		Preview    string `json:"preview,omitempty"`
 		CreateDate int64  `json:"create_date"`
 	}
 
@@ -31,8 +31,6 @@ func (entry *Entry) Validate() error {
 		return errors.New("url is a required field")
 	case entry.Title == "":
 		return errors.New("title is a required field")
-	case entry.Preview == "":
-		return errors.New("preview is a required field")
 	case entry.CreateDate == 0:
 		return errors.New("create_date is a required field")
 	}

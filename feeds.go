@@ -39,7 +39,10 @@ func (feeds *Feeds) Load(filepath string) error {
 func (feed *Feed) Run(runner runcmd.Runner, storage EntryStorage) {
 	log.Printf("[feed:%s] Execute '%s'", feed.Name, feed.Command)
 
-	cmd, _ := runner.Command(feed.Command)
+	cmd, err := runner.Command(feed.Command)
+	if err != nil {
+		log.Fatal(err)
+	}
 	response, err := cmd.Run()
 	if err != nil {
 		log.Printf("[feed:%s] Got error during execution '%s': %s",
